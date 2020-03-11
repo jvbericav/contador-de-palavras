@@ -10,13 +10,41 @@
 int main() {
 
   char c;
-
+  int spc, count, jafoi, number;
   c = 1;
+  count = 0; spc = 0; jafoi = 0; number = 0;
 
   while (c != '\n') {
-    scanf("%c", &c);
-  }
+      scanf("%c", &c);
+      //verifica numeros com pontuação
+      if ((c == ',' || c == '.') && number){
+          if (jafoi){
+              count ++;
+              spc = 0;
+          }else{
+              spc = 1;
+              jafoi = 1;
+          }
+      // verifica final de palavra
+      } else if (c == ' ' || c == ',' || c == '.' || c == '-'|| c == '!'){
+          if(spc)
+              count ++;
+          spc = 0;
+          jafoi = 0;
+      // verifica se tem palavra ou espaço antes do \n
+      } else if(c == '\n' && spc){
+          count ++;
+      // casos de letras ou números
+      } else {
+        spc = 1;
+	if(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' || c=='6' || c=='7' || c=='8' || c=='9')
+	    number =1;
+        else
+            number = 0; 
+      } 
+  } 
+  
+  printf("%d\n", count);
 
-  printf("1\n");
   return 0;
 }
